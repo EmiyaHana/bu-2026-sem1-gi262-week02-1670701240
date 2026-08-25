@@ -19,15 +19,15 @@ namespace Workshop.Student
         };
 
         // 1. declare Players variable
+        public GameObject player;
 
-        // 7. declare Exit variable 
-
+        // 7. declare Exit variable
+        public GameObject exit;
 
         public void Start()
         {
             // 1. random player at the position <0, 0> map
-
-            // 2. create obstacles
+            GameObject Player = Instantiate(player, new Vector2(0,0), Quaternion.identity);
 
             // 3. create floor
             for (int y = 0; y < rows; y++)
@@ -37,6 +37,20 @@ namespace Workshop.Student
                     int r = UnityEngine.Random.Range(0, floorTiles.Length);
                     GameObject tile = Instantiate(floorTiles[r], new Vector2(x, y), Quaternion.identity);
                     tile.name = "Floor" + x + "_" + y;
+                }
+            }
+
+            // 2. create obstacles
+            int midWallx = columns / 2;
+            for ( int y = 0; y < rows / 2; y++)
+            {
+                int r = UnityEngine.Random.Range(0, wallTiles.Length);
+                GameObject obstacle = Instantiate(wallTiles[r], new Vector2(midWallx, y), Quaternion.identity);
+                obstacle.name = "Obstacle" + midWallx + "_" + y;
+
+                if (obstacle.GetComponent<SpriteRenderer>() != null)
+                {
+                    obstacle.GetComponent<SpriteRenderer>().sortingOrder = 5;
                 }
             }
 
@@ -85,7 +99,7 @@ namespace Workshop.Student
             }
 
             // 7. place exit
-
+            GameObject Exit = Instantiate(exit, new Vector2(9,9), Quaternion.identity);
         }
     }
 
