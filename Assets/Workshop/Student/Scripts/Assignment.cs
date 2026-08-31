@@ -1022,6 +1022,32 @@ namespace Assignment
             if (ex01_board == null) return;
 
             var board = ex01_board.Get2DArray();
+
+            // 1. ตรวจสอบความถูกต้องของการเดิน (Invalid move)
+            if (ex01_row < 0 || ex01_row > 2 || ex01_column < 0 || ex01_column > 2 || !string.IsNullOrEmpty(board[ex01_row, ex01_column]))
+            {
+                PrintBoard(board);
+                Debug.Log(">> Invalid move");
+                return;
+            }
+
+            // 2. อัปเดตการเดินของผู้เล่น
+            board[ex01_row, ex01_column] = ex01_playerTurn;
+            PrintBoard(board);
+
+            // 3. ตรวจสอบสถานะเกม
+            if (CheckWin(board, ex01_playerTurn))
+            {
+                Debug.Log($">> {ex01_playerTurn} wins!");
+            }
+            else if (IsBoardFull(board))
+            {
+                Debug.Log(">> Draw");
+            }
+            else
+            {
+                Debug.Log(">> Continue");
+            }
             
         }
         #endregion
@@ -1036,6 +1062,34 @@ namespace Assignment
             }
             sb.AppendLine("-------------");
             Debug.Log(sb.ToString());
+        }
+
+        private bool CheckWin(string[,] board, string player)
+        {
+            // ตรวจสอบแนวราบและแนวตั้ง
+            for (int i = 0; i < 3; i++)
+            {
+                if (board[i, 0] == player && board[i, 1] == player && board[i, 2] == player) return true;
+                if (board[0, i] == player && board[1, i] == player && board[2, i] == player) return true;
+            }
+
+            // ตรวจสอบแนวทแยง
+            if (board[0, 0] == player && board[1, 1] == player && board[2, 2] == player) return true;
+            if (board[0, 2] == player && board[1, 1] == player && board[2, 0] == player) return true;
+
+            return false;
+        }
+
+        private bool IsBoardFull(string[,] board)
+        {
+            for (int r = 0; r < 3; r++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    if (string.IsNullOrEmpty(board[r, c])) return false;
+                }
+            }
+            return true;
         }
 
         private string spaceIfEmpty(string value)
