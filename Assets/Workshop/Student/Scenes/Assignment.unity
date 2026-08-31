@@ -217,18 +217,18 @@ MonoBehaviour:
     rows: 3
     cols: 3
     data:
-    - X
-    - X
-    - O
-    - X
-    - O
-    - X
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
     - 
     - 
     - 
   ex01_playerTurn: X
-  ex01_row: 2
-  ex01_column: 2
+  ex01_row: 0
+  ex01_column: 1
 --- !u!1 &652921969
 GameObject:
   m_ObjectHideFlags: 0
