@@ -10,7 +10,7 @@ namespace Assignment
     {
         public void Start()
         {
-            AS01_RandomItemDrop();
+            // AS01_RandomItemDrop();
             // AS02_NestedLoopForCreate2DMap();
             // AS03_NestedLoopForMakingWallAround();
             // AS04_AttackEnemy();
@@ -26,7 +26,7 @@ namespace Assignment
             // AS14_SumOfNumbersInColumn();
             // AS15_MakeTheTriangle();
             // AS16_MultiplicationTableOf_2_3_and_4();
-            // EX_01_TicTacToeGame_TurnPlay();
+            EX_01_TicTacToeGame_TurnPlay();
 
         }
 
@@ -1019,6 +1019,8 @@ namespace Assignment
         public int ex01_column = 0;
         public void EX_01_TicTacToeGame_TurnPlay()
         {
+            if (ex01_board == null) return;
+
             var board = ex01_board.Get2DArray();
             
         }
